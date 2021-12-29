@@ -74,6 +74,14 @@ function game() {
 }
 
 function finishGame(playerScore, computerScore) {
-    alert(playerScore)
-    alert(computerScore)
+    if (playerScore > computerScore) {
+        alert(`Congratulations, you've beaten me, ${playerScore}:${computerScore}! I was going easy on you, ya know?`);
+    } else {
+        alert(`Haha, I beat you ${computerScore}:${playerScore}! Better luck next time!`);
+    }
+
+    let confirmRepeat = confirm("Play again?");
+    if (confirmRepeat) {
+        game();
+    }
 }
