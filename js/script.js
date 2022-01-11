@@ -38,9 +38,13 @@ function playRound(playerSelection, computerSelection) {
 let playerSelectButtons = document.querySelectorAll("button");
 playerSelectButtons.forEach( (button) => {
     button.addEventListener( 'click', (e) => {
-        game(button.getAttribute("id"))
+        game(button.getAttribute("id"));
     })
 })
+
+// DOM Setup for pirate talk + scores paragraphs
+let pirateTalkPara = document.querySelector('#pirate_talk');
+let scoresPara = document.querySelector('#scores');
 
 // Main game
 function game(playerInput) {
@@ -48,17 +52,20 @@ function game(playerInput) {
     switch (output) {
         case "WIN":
             playerScore += 1;
-            alert(`You win!\n\nCurrent scores:\nPlayer: ${playerScore}\nComputer: ${computerScore}`);
+            pirateTalkPara.textContent = `Argh, ye got lucky, lad!`;
+            scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
             break;
         case "TIE":
-            alert(`Tie!\n\nCurrent scores:\nPlayer: ${playerScore}\nComputer: ${computerScore}`);
+            pirateTalkPara.textContent = `Blisterin' barnacles, it's a tie!`;
+            scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
             break;
         case "LOSE":
             computerScore += 1;
-            alert(`You lose!\n\nCurrent scores:\nPlayer: ${playerScore}\nComputer: ${computerScore}`);
+            pirateTalkPara.textContent = `Har har, I win!`;
+            scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
             break;
         default:
-            alert("Something has gone terribly wrong. Try again!")
+            console.log("Something has gone terribly wrong. Try again!");
             break;
     }
 
