@@ -1,0 +1,80 @@
+@font-face {
+    font-family: PiratesBay;
+    src: url(../fonts/PiratesBay.ttf);
+}
+
+body {
+    margin: 0;
+    font-family: PiratesBay;
+}
+
+/* Header styling */
+header {
+    background-color: rgb(116, 47, 47);
+    padding: 25px;
+}
+
+header h1 {
+    text-align: center;
+    color: white;
+    margin:0;
+}
+
+/* Pirate styling, img + p elements */
+#pirate_flex_container {
+    margin-top: 18px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#details {
+    border: 5px solid black;
+    padding: 25px;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+#details p {
+    width: 600px;
+    font-size: 14px;
+}
+
+#details #pirate_talk {
+    font-size: 22px;
+}
+
+/* Buttons styling */
+
+#choice_buttons {
+    display: flex;
+    margin: 50px 100px;
+    justify-content: space-evenly;
+}
+
+button {
+    border: 5px solid rgb(247, 210, 0);
+    border-radius: 10px;
+    background-color: rgb(209, 135, 101);
+    font-family: PiratesBay;
+    font-size:larger;
+}
+
+button:hover {
+    color: white;
+    box-shadow: 3px 3px black;
+}
+
+button.play {
+    display:flex;
+    flex-direction: column;
+    padding: 25px 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+button.replay {
+    padding: 50px;
+    font-size: 24px;
+}

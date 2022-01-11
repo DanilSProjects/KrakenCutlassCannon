@@ -81,11 +81,12 @@ function finishGame(playerScore, computerScore) {
         pirateTalkPara.textContent = `Har har har, I beat you! Better luck next time, chum!`
     }
     playerSelectButtons.forEach( (button) => {
-        button.hidden = true;
+        button.style.display = "none";
     })
     let choiceButtonsDiv = document.querySelector('#choice_buttons');
     let replayButton = document.createElement('button');
     replayButton.textContent = "Play again?";
+    replayButton.classList.add("replay");
     replayButton.addEventListener('click', () => {
         choiceButtonsDiv.removeChild(replayButton);
         reset();
@@ -96,7 +97,7 @@ function finishGame(playerScore, computerScore) {
 // Reset function, if player decides to play again
 function reset() {
     playerSelectButtons.forEach( (button) => {
-        button.hidden = false;
+        button.style.display = "flex";
     })
     playerScore = 0;
     computerScore = 0;
