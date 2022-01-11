@@ -69,18 +69,37 @@ function game(playerInput) {
             break;
     }
 
-    //finishGame(playerScore, computerScore); -> commented until fixed
+    if (playerScore === 5 | computerScore === 5) {
+        finishGame(playerScore, computerScore);
+    }
 }
 
 function finishGame(playerScore, computerScore) {
     if (playerScore > computerScore) {
-        alert(`Congratulations, you've beaten me, ${playerScore}:${computerScore}! I was going easy on you, ya know?`);
+        pirateTalkPara.textContent = `Blimey, you've beaten me, you scallywag! I was going easy on you, ye know?`;
     } else {
-        alert(`Haha, I beat you ${computerScore}:${playerScore}! Better luck next time!`);
+        pirateTalkPara.textContent = `Har har har, I beat you! Better luck next time, chum!`
     }
+    playerSelectButtons.forEach( (button) => {
+        button.hidden = true;
+    })
+    let choiceButtonsDiv = document.querySelector('#choice_buttons');
+    let replayButton = document.createElement('button');
+    replayButton.textContent = "Play again?";
+    replayButton.addEventListener('click', () => {
+        choiceButtonsDiv.removeChild(replayButton);
+        reset();
+    });
+    choiceButtonsDiv.appendChild(replayButton);
+}
 
-    let confirmRepeat = confirm("Play again?");
-    if (confirmRepeat) {
-        game();
-    }
+// Reset function, if player decides to play again
+function reset() {
+    playerSelectButtons.forEach( (button) => {
+        button.hidden = false;
+    })
+    playerScore = 0;
+    computerScore = 0;
+    pirateTalkPara.textContent = "Ahoy, ye landlubber! Pick kraken, cutlass or cannon and fight me like a man, first to 5!";
+    scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
 }
