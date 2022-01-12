@@ -6,7 +6,7 @@ let pirateExposition = [
 "Ye're like enough wonderin' how ye got here. Doesn't matter.",
 "What matters now is that your life hangs between the rum glass and the mouth, so to speak, laddie.",
 "Normally we kill any prisoners we get our grubby hands on, but I'm pretty bored - these numbskulls on the ship are hardly any good company - and you seem a sturdy enough lad.",
-"So, tell ye what - play a good game of Kraken, Cutlass, Cannon with me. If you win 3 rounds, you join the crew. If you lose, you get the privilege of walking the plank.",
+"So, tell ye what - play a good game of Kraken, Cutlass, Cannon with me. If you win 5 rounds, you join the crew. If you lose, you get the privilege of walking the plank.",
 "The rules are simple:",
 "Kraken beats cannon - those slippery bastards rip cannons off the deck like meat off the bone.",
 "Cutlass beats kraken - you land a clean hit into the eye and that hellhound won't be coming back for decades.",
@@ -36,13 +36,22 @@ function beginExposition() {
     playerSelectButtons.forEach((button) => {
         button.style.display = "none";
     })
+
+    // Button to continue exposition
     let continueButton = document.createElement('button');
     continueButton.textContent = "Continue";
     continueButton.classList.add('play');
 
+    // Button to completely skip exposition
+    let skipButton = document.createElement('button');
+    skipButton.textContent = "Skip";
+    skipButton.classList.add('play');
+
     let expositionIndex= 0;
     let expositionLimit = pirateExposition.length - 1;
     pirateTalkPara.textContent = pirateExposition[expositionIndex];
+    
+    // Click to advance exposition
     continueButton.addEventListener('click', () => {
         expositionIndex += 1;
 
@@ -57,7 +66,18 @@ function beginExposition() {
         }
     });
 
+    // Click to skip exposition
+    skipButton.addEventListener('click', () => {
+        choiceButtonsDiv.removeChild(continueButton);
+        choiceButtonsDiv.removeChild(skipButton);
+        playerSelectButtons.forEach((button) => {
+            button.style.display = "flex";
+        })
+        pirateTalkPara.textContent = "I'm going to drink you like rum, lad!";
+    }) 
+
     choiceButtonsDiv.appendChild(continueButton);
+    choiceButtonsDiv.appendChild(skipButton);
 }
 
 window.onload = beginExposition;
