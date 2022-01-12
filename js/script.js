@@ -1,10 +1,10 @@
 // Variable setup
 let pirateExposition = [
 "Ahoy, landlubber! Had a good sleep? Har har!", 
-"The name's Bill, cap'n o' the Hallyho Men. Most of me lads call me Crazy Bill, no clue why.",
+"The name's Bill, cap'n o' the Jolly Barnacle. Most of me lads call me Crazy Bill, no clue why.",
 "We're a whole family of friendly loot hunters and kindly murderers. Har har!",
 "Ye're like enough wonderin' how ye got here. Doesn't matter.",
-"What matters now is that your life hangs between the rum glass and the mouth, so to speak, laddie.",
+"What matters now is that your life hangs between the rum glass and the stomach, so to speak, laddie.",
 "Normally we kill any prisoners we get our grubby hands on, but I'm pretty bored - these numbskulls on the ship are hardly any good company - and you seem a sturdy enough lad.",
 "So, tell ye what - play a good game of Kraken, Cutlass, Cannon with me. If you win 5 rounds, you join the crew. If you lose, you get the privilege of walking the plank.",
 "The rules are simple:",
@@ -13,6 +13,17 @@ let pirateExposition = [
 'Cannon beats cutlass - as my pop used to say, "never bring a sabre to a cannon battle."',
 "Easy enough? Great, let's begin!"
 ];
+let winExposition = [
+    "Blimey, you've beaten me, you scallywag! I was going easy on you, ye know?",
+    "Well, I'm a man o' me word. I said that y'd get to join the crew if ye win.",
+    "What can I say? Welcome aboard, lad!",
+    "Your first order of duty: mopping the deck, har har!"
+]
+let loseExposition = [
+    "Har har har, I beat you! Better luck next time, chum!",
+    "Ah wait, I forgot, there won't be a next time, har har!",
+    "Come on, lads, let's escort our lovely guest 'ere over to the plank!"
+]
 let possiblePlays = ["KRAKEN", "CUTLASS", "CANNON"];
 let combinations = [{win:"KRAKEN", lose:"CANNON"}, {win:"CUTLASS", lose:"KRAKEN"}, {win:"CANNON", lose:"CUTLASS"}]
 let playerScore = 0;
@@ -45,7 +56,7 @@ function unhover(element) {
 }
 
 // Function for the exposition and beginning of the game
-function beginExposition() {
+function beginExposition(pirateExposition, startOrEnd) {
     rulesContainer.style.display = "none";
     playerSelectButtons.forEach((button) => {
         button.style.display = "none";
@@ -68,36 +79,54 @@ function beginExposition() {
     // Click to advance exposition
     continueButton.addEventListener('click', () => {
         expositionIndex += 1;
-
+        console.log(expositionIndex);
+        console.log(expositionLimit);
         if (expositionIndex <= expositionLimit) {
             pirateTalkPara.textContent = pirateExposition[expositionIndex];
         } else {
-            choiceButtonsDiv.removeChild(continueButton);
-            choiceButtonsDiv.removeChild(skipButton);
-            playerSelectButtons.forEach((button) => {
-                button.style.display = "flex";
-            })
-            pirateTalkPara.textContent = "I'm going to drink you like rum, lad!";
-            rulesContainer.style.display = "flex";
+            postExposition(startOrEnd, continueButton, skipButton);
         }
     });
 
     // Click to skip exposition
     skipButton.addEventListener('click', () => {
-        choiceButtonsDiv.removeChild(continueButton);
-        choiceButtonsDiv.removeChild(skipButton);
-        playerSelectButtons.forEach((button) => {
-            button.style.display = "flex";
-        })
-        pirateTalkPara.textContent = "I'm going to drink you like rum, lad!";
-        rulesContainer.style.display = "flex";
+        postExposition(startOrEnd, continueButton, skipButton);
     }) 
 
     choiceButtonsDiv.appendChild(continueButton);
     choiceButtonsDiv.appendChild(skipButton);
 }
 
-window.onload = beginExposition;
+function postExposition(startOrEnd, continueButton, skipButton) {
+    choiceButtonsDiv.removeChild(continueButton);
+    choiceButtonsDiv.removeChild(skipButton);
+    if (startOrEnd === "start") {
+        playerSelectButtons.forEach((button) => {
+            button.style.display = "flex";
+        })
+        pirateTalkPara.textContent = "I'm going to drink you like rum, lad!";
+        rulesContainer.style.display = "flex";
+    } else if (startOrEnd === "end") {
+        let currentText = pirateTalkPara.textContent;
+        let currentExposition = [];
+        if (winExposition.includes(currentText)) {
+            currentExposition = winExposition;
+        } else if (loseExposition.includes(currentText)) {
+            currentExposition = loseExposition;
+        }
+        pirateTalkPara.textContent = currentExposition[currentExposition.length - 1];
+        let replayButton = document.createElement('button');
+        replayButton.textContent = "Play again?";
+        replayButton.classList.add("replay");
+        replayButton.addEventListener('click', () => {
+            choiceButtonsDiv.removeChild(replayButton);
+            reset();
+        });
+        choiceButtonsDiv.appendChild(replayButton);
+    }
+}
+
+window.onload = beginExposition(pirateExposition, "start");
 
 // Functions for computer's turn + randomising it as much as possible
 function computerPlay() {
@@ -161,30 +190,19 @@ function game(playerInput) {
 
 function finishGame(playerScore, computerScore) {
     if (playerScore > computerScore) {
-        pirateTalkPara.textContent = `Blimey, you've beaten me, you scallywag! I was going easy on you, ye know?`;
+        beginExposition(winExposition, "end");
     } else {
-        pirateTalkPara.textContent = `Har har har, I beat you! Better luck next time, chum!`
+        beginExposition(loseExposition, "end");
     }
     playerSelectButtons.forEach( (button) => {
         button.style.display = "none";
     })
-    let replayButton = document.createElement('button');
-    replayButton.textContent = "Play again?";
-    replayButton.classList.add("replay");
-    replayButton.addEventListener('click', () => {
-        choiceButtonsDiv.removeChild(replayButton);
-        reset();
-    });
-    choiceButtonsDiv.appendChild(replayButton);
 }
 
 // Reset function, if player decides to play again
 function reset() {
-    playerSelectButtons.forEach( (button) => {
-        button.style.display = "flex";
-    })
     playerScore = 0;
     computerScore = 0;
-    pirateTalkPara.textContent = "Ahoy, ye landlubber! Pick kraken, cutlass or cannon and fight me like a man, first to 5!";
+    beginExposition(pirateExposition, "start");
     scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
 }
