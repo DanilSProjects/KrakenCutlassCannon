@@ -24,12 +24,22 @@ let scoresPara = document.querySelector('#scores');
 
 // DOM Setup for buttons
 let choiceButtonsDiv = document.querySelector('#choice_buttons');
-let playerSelectButtons = document.querySelectorAll(".play");
+let playerSelectButtons = document.querySelectorAll("button.play");
 playerSelectButtons.forEach( (button) => {
     button.addEventListener( 'click', (e) => {
         game(button.getAttribute("id"));
     })
 })
+
+function hover(element) {
+    let buttonImage = document.querySelector(`#${element.getAttribute('id')}_image`);
+    buttonImage.setAttribute('src', `./images/${element.getAttribute('id')}_white.png`);
+}
+
+function unhover(element) {
+    let buttonImage = document.querySelector(`#${element.getAttribute('id')}_image`);
+    buttonImage.setAttribute('src', `./images/${element.getAttribute('id')}.png`);
+}
 
 // Function for the exposition and beginning of the game
 function beginExposition() {
@@ -59,6 +69,7 @@ function beginExposition() {
             pirateTalkPara.textContent = pirateExposition[expositionIndex];
         } else {
             choiceButtonsDiv.removeChild(continueButton);
+            choiceButtonsDiv.removeChild(skipButton);
             playerSelectButtons.forEach((button) => {
                 button.style.display = "flex";
             })
