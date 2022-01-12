@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<head>
-    <title>Kraken Cutlass Cannon</title>
-    <meta charset="UTF-8">
-    <script src="./js/script.js" defer></script>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-    <header>
-        <h1>Kraken Cutlass Cannon</h1>
-    </header>
-        <div id="pirate_flex_container">
-            <img src="./images/placeholder_pirate.png" alt="Pirate captain with a cutlass." width=250>
-            <div id="details">
-                <p id="pirate_talk"></p>
-                <p id="scores">Player: 0 | Captain Bill: 0</p>
+<html>
+    <head>
+        <title>Kraken Cutlass Cannon</title>
+        <meta charset="UTF-8">
+        <script src="./js/script.js" defer></script>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Kraken Cutlass Cannon</h1>
+        </header>
+            <div id="pirate_flex_container">
+                <img src="./images/placeholder_pirate.png" alt="Pirate captain with a cutlass." width=250>
+                <div id="details">
+                    <p id="pirate_talk"></p>
+                    <p id="scores">Player: 0 | Captain Bill: 0</p>
+                </div>
             </div>
-        </div>
-        <div id="deck_background">
-            <div id="choice_buttons">
-                <button onmouseenter="hover(this)" onmouseleave="unhover(this)" id="kraken" class="play"><img id="kraken_image" src="./images/kraken.png" width=50>Kraken</button>
-                <button onmouseenter="hover(this)" onmouseleave="unhover(this)" id="cutlass" class="play"><img id="cutlass_image" src="./images/cutlass.png" width=50>Cutlass</button>
-                <button onmouseenter="hover(this)" onmouseleave="unhover(this)" id="cannon" class="play"><img id="cannon_image" src="./images/cannon.png" width=50>Cannon</button>
+            <div id="rules_container">
+                <img src="./images/rules1.jpg" alt="Game rules: kraken beats cannon.">
+                <img src="./images/rules2.jpg" alt="Game rules: cutlass beats kraken.">
+                <img src="./images/rules3.jpg" alt="Game rules: cannon beats cutlass.">
             </div>
-        </div>
-</body>
+            <div id="deck_background">
+                <div id="choice_buttons">
+                    <button onmouseenter="hover(this)" onmouseleave="unhover(this)" id="kraken" class="play"><img id="kraken_image" src="./images/kraken.png" width=50>Kraken</button>
+                    <button onmouseenter="hover(this)" onmouseleave="unhover(this)" id="cutlass" class="play"><img id="cutlass_image" src="./images/cutlass.png" width=50>Cutlass</button>
+                    <button onmouseenter="hover(this)" onmouseleave="unhover(this)" id="cannon" class="play"><img id="cannon_image" src="./images/cannon.png" width=50>Cannon</button>
+                </div>
+            </div>
+    </body>
 </html>

@@ -21,6 +21,15 @@ header h1 {
     margin:0;
 }
 
+/* Rules styling */
+
+#rules_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Pirate styling, img + p elements */
 #pirate_flex_container {
     padding: 25px;

@@ -22,6 +22,9 @@ let computerScore = 0;
 let pirateTalkPara = document.querySelector('#pirate_talk');
 let scoresPara = document.querySelector('#scores');
 
+// DOM Setup for rules
+let rulesContainer = document.querySelector('#rules_container');
+
 // DOM Setup for buttons
 let choiceButtonsDiv = document.querySelector('#choice_buttons');
 let playerSelectButtons = document.querySelectorAll("button.play");
@@ -43,6 +46,7 @@ function unhover(element) {
 
 // Function for the exposition and beginning of the game
 function beginExposition() {
+    rulesContainer.style.display = "none";
     playerSelectButtons.forEach((button) => {
         button.style.display = "none";
     })
@@ -74,6 +78,7 @@ function beginExposition() {
                 button.style.display = "flex";
             })
             pirateTalkPara.textContent = "I'm going to drink you like rum, lad!";
+            rulesContainer.style.display = "flex";
         }
     });
 
@@ -85,6 +90,7 @@ function beginExposition() {
             button.style.display = "flex";
         })
         pirateTalkPara.textContent = "I'm going to drink you like rum, lad!";
+        rulesContainer.style.display = "flex";
     }) 
 
     choiceButtonsDiv.appendChild(continueButton);
