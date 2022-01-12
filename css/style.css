@@ -22,11 +22,13 @@ header h1 {
 
 /* Pirate styling, img + p elements */
 #pirate_flex_container {
-    margin-top: 18px;
+    padding: 25px;
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(87, 20, 20, 0.4)), url(../images/ship_background.jpg) no-repeat;
+    background-size: cover;
 }
 
 #details {
@@ -34,6 +36,7 @@ header h1 {
     padding: 25px;
     border-radius: 5px;
     margin-left: 50px;
+    background-color: white;
 }
 
 #details p {
@@ -47,10 +50,17 @@ header h1 {
 
 /* Buttons styling */
 
+#deck_background{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(../images/deck.jpg) no-repeat;
+    background-size: cover;
+    border: 5px solid rgb(185, 154, 113);
+}
+
 #choice_buttons {
     display: flex;
-    margin: 50px 100px;
+    margin: 0px 100px 0px 100px;
     justify-content: space-evenly;
+    padding: 50px;
 }
 
 button {

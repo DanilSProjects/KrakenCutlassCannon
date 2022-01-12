@@ -48,20 +48,21 @@ let scoresPara = document.querySelector('#scores');
 
 // Main game
 function game(playerInput) {
-    let output = playRound(playerInput, computerPlay());
+    let computersPick = computerPlay()
+    let output = playRound(playerInput, computersPick);
     switch (output) {
         case "WIN":
             playerScore += 1;
-            pirateTalkPara.textContent = `Argh, ye got lucky, lad!`;
+            pirateTalkPara.textContent = `Argh, ye got lucky, lad! I picked ${computersPick}.`;
             scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
             break;
         case "TIE":
-            pirateTalkPara.textContent = `Blisterin' barnacles, it's a tie!`;
+            pirateTalkPara.textContent = `Blisterin' barnacles, it's a tie! I picked ${computersPick}.`;
             scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
             break;
         case "LOSE":
             computerScore += 1;
-            pirateTalkPara.textContent = `Har har, I win!`;
+            pirateTalkPara.textContent = `Har har, I win! I picked ${computersPick}.`;
             scoresPara.textContent = `Player: ${playerScore} | Captain Bill: ${computerScore}`;
             break;
         default:
